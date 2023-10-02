@@ -3,8 +3,10 @@
 import _ from "lodash";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Check from "@/components/svg/Check";
 import Xmark from "@/components/svg/Xmark";
+import { Button } from "@/components/ui/button";
 
 export type ImageAttributes = {
   url: string;
@@ -44,9 +46,18 @@ export type ImportVehicle = {
 export const columns: ColumnDef<ImportVehicle>[] = [
   {
     accessorKey: "Make",
-    header: () => (
-      <div className="flex items-center justify-start text-gray-50">Make</div>
-    ),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Make
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return (
         <div
@@ -56,7 +67,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
               : row.original.Ticket === "Y"
               ? "text-green-600"
               : " text-black"
-          }`}
+          } pl-4`}
         >
           {row.original.Make}
         </div>
@@ -86,9 +97,18 @@ export const columns: ColumnDef<ImportVehicle>[] = [
   },
   {
     accessorKey: "Year",
-    header: () => (
-      <div className="flex items-center justify-center text-gray-50">Year</div>
-    ),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Year
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return row.original.Year > 0 ? (
         <span className="flex items-center justify-center">
@@ -103,9 +123,18 @@ export const columns: ColumnDef<ImportVehicle>[] = [
   },
   {
     accessorKey: "Price",
-    header: () => (
-      <div className="flex items-center justify-center text-gray-50">Price</div>
-    ),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Price
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       function formatNumberWithCommas(Price: string) {
         return _.replace(Price, /\B(?=(\d{3})+(?!\d))/g, ",");
@@ -133,9 +162,18 @@ export const columns: ColumnDef<ImportVehicle>[] = [
   },
   {
     accessorKey: "Stock",
-    header: () => (
-      <div className="flex items-center justify-center text-gray-50">Stock</div>
-    ),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Stock
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       function transformStock(Stock: any) {
         switch (Stock) {
@@ -149,6 +187,11 @@ export const columns: ColumnDef<ImportVehicle>[] = [
             return Stock;
         }
       }
+      function extractNumberFromString(string: string) {
+        const numberRegex = /\d+/;
+        const match = string.match(numberRegex);
+        return match ? Number(match[0]) : string;
+      }
       return (
         <div
           className={`${
@@ -160,10 +203,12 @@ export const columns: ColumnDef<ImportVehicle>[] = [
               ? "bg-blue-400 text-slate-50"
               : (row.original.Stock as any) == "0"
               ? "bg-red-700 text-white"
-              : ""
+              : row.original.Stock > 0 && row.original.Stock <= 5
+              ? "bg-orange-500 text-slate-50"
+              : "bg-blue-700 text-white"
           } flex items-center justify-center h-full w-full py-1 px-2`}
         >
-          {transformStock(row.original.Stock)}
+          {transformStock(extractNumberFromString(row.original.Stock as any))}
         </div>
       );
     },
@@ -197,9 +242,18 @@ export const columns: ColumnDef<ImportVehicle>[] = [
   },
   {
     accessorKey: "Seats",
-    header: () => (
-      <div className="flex items-center justify-center text-gray-50">Seats</div>
-    ),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Seats
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-center">
@@ -210,9 +264,18 @@ export const columns: ColumnDef<ImportVehicle>[] = [
   },
   {
     accessorKey: "Trunk",
-    header: () => (
-      <div className="flex items-center justify-center text-gray-50">Trunk</div>
-    ),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Trunk
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-center">
@@ -223,9 +286,18 @@ export const columns: ColumnDef<ImportVehicle>[] = [
   },
   {
     accessorKey: "Speed",
-    header: () => (
-      <div className="flex items-center justify-center text-gray-50">Speed</div>
-    ),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Speed
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return (
         <div>
@@ -242,11 +314,18 @@ export const columns: ColumnDef<ImportVehicle>[] = [
   },
   {
     accessorKey: "Handling",
-    header: () => (
-      <div className="flex items-center justify-center text-gray-50">
-        Handling
-      </div>
-    ),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Handling
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-center">
@@ -257,14 +336,21 @@ export const columns: ColumnDef<ImportVehicle>[] = [
   },
   {
     accessorKey: "Category",
-    header: () => (
-      <div className="flex items-center justify-center text-gray-50">
-        Category
-      </div>
-    ),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Category
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return (
-        <div className="flex items-center justify-center uppercase">
+        <div className="flex items-center justify-center text-base uppercase">
           {row.original.Category}
         </div>
       );
@@ -279,7 +365,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <div className="flex items-center justify-center uppercase">
+        <div className="flex items-center justify-center text-base uppercase">
           {`Generation ${row.original.Generation}`}
         </div>
       );
