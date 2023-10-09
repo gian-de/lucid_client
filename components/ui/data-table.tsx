@@ -56,7 +56,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex flex-col w-[90vw] h-[85vh] mx-auto">
+      <div className="flex flex-col w-[93vw] h-[88vh] mx-auto">
         <div className="flex items-center justify-between py-5">
           <Input
             placeholder="Search by Make..."
@@ -64,20 +64,17 @@ export function DataTable<TData, TValue>({
             onChange={(event) =>
               table.getColumn("make")?.setFilterValue(event.target.value)
             }
-            className="max-w-lg text-xl"
+            className="max-w-lg text-xl border-gray-600"
           />
-          <div>
+          <div className="text-lg">
             <div className="flex space-x-2">
               <div className="flex items-center space-x-4">Total Vehicles:</div>
               <div className="text-2xl">[{data.length}]</div>
             </div>
             <p>
-              <span className="text-green-600">$$$</span> = Ticket required
+              <span className="text-green-600">$$$</span> = ticket required
             </p>
           </div>
-          {/* <p className="text-lg">
-            {"scroll the table row to view more info -->"}
-          </p> */}
         </div>
         <Table className="relative w-full">
           <TableHeader className="sticky top-0 z-10 h-20 text-lg font-medium tracking-tight uppercase bg-gray-700">

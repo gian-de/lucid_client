@@ -237,6 +237,34 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     },
   },
   {
+    accessorKey: "speed",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+        >
+          Speed
+          <ArrowUpDown className="w-5 h-5 ml-2" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      return (
+        <div>
+          {row.original.speed === 999 ? (
+            <span className="flex items-center justify-center text-red-500">
+              {"-"}
+            </span>
+          ) : (
+            <span className="flex items-center justify-center">{`${row.original.speed} mph`}</span>
+          )}
+        </div>
+      );
+    },
+  },
+  {
     accessorKey: "seats",
     header: ({ column }) => {
       return (
@@ -280,34 +308,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
       );
     },
   },
-  {
-    accessorKey: "speed",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
-        >
-          Speed
-          <ArrowUpDown className="w-5 h-5 ml-2" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      return (
-        <div>
-          {row.original.speed === 999 ? (
-            <span className="flex items-center justify-center text-red-500">
-              {"-"}
-            </span>
-          ) : (
-            <span className="flex items-center justify-center">{`${row.original.speed} mph`}</span>
-          )}
-        </div>
-      );
-    },
-  },
+
   {
     accessorKey: "handling",
     header: ({ column }) => {
