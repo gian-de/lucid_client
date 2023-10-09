@@ -6,7 +6,7 @@ const Check = () => {
       viewBox="0 0 24 24"
       strokeWidth={2.5}
       stroke="currentColor"
-      className="w-6 h-6 text-green-500"
+      className="w-5 h-5 text-green-500"
     >
       <path
         strokeLinecap="round"

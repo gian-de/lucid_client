@@ -2,11 +2,15 @@
 
 import * as React from "react";
 
+import { Input } from "@/components/ui/input";
+
 import {
   ColumnDef,
+  ColumnFiltersState,
   SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -30,8 +34,11 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([
-    { id: "Make", desc: false },
+    { id: "make", desc: false },
   ]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
 
   const table = useReactTable({
     data,
@@ -39,26 +46,40 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
+      columnFilters,
     },
   });
 
   return (
-    <div className="flex">
-      <div className="fixed z-10 flex flex-col items-start justify-center w-48 py-20 text-lg font-semibold tracking-tighter uppercase">
-        <div className="flex flex-col px-6">
-          <div className="text-2xl">[{data.length}]</div>
-          <div className="flex items-center space-x-4">Total Vehicles</div>
-        </div>
-        <div className="px-6 pt-20">
+    <div>
+      <div className="flex flex-col w-[90vw] mx-auto">
+        <div className="flex items-center justify-center pt-5 space-x-16 text-lg font-semibold tracking-tighter uppercase">
+          <div className="flex space-x-2">
+            <div className="flex items-center space-x-4">Total Vehicles:</div>
+            <div className="text-2xl">[{data.length}]</div>
+          </div>
           <p>
             <span className="text-green-600">$$$</span> = Ticket required
           </p>
         </div>
-      </div>
-      <div className="ml-48 overflow-x-auto">
-        <Table className="relative w-full ">
+        <div className="flex items-center justify-between py-5">
+          <Input
+            placeholder="Search by Make..."
+            value={(table.getColumn("make")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("make")?.setFilterValue(event.target.value)
+            }
+            className="max-w-lg text-xl"
+          />
+          <p className="text-lg">
+            {"scroll the table row to view more info -->"}
+          </p>
+        </div>
+        <Table className="relative w-full">
           <TableHeader className="sticky top-0 z-10 h-20 text-lg font-medium tracking-tight uppercase bg-gray-700">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -100,9 +121,9 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-24 p-10 text-3xl"
                 >
-                  No results.
+                  No results found.
                 </TableCell>
               </TableRow>
             )}

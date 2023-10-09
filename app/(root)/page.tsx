@@ -1,5 +1,7 @@
-const RootPage = () => {
-  return <div>root page</div>;
-};
-
-export default RootPage;
+export default function Home() {
+  return (
+    <main className="flex flex-col items-center justify-between min-h-screen p-24 text-3xl">
+      <p>home page placeholder text</p>
+    </main>
+  );
+}

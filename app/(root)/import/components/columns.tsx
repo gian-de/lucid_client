@@ -3,7 +3,7 @@
 import _ from "lodash";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import Check from "@/components/svg/Check";
 import Xmark from "@/components/svg/Xmark";
 import { Button } from "@/components/ui/button";
@@ -26,26 +26,26 @@ export type ImportResponse = {
 };
 
 export type ImportVehicle = {
-  Make: string;
-  Model: string;
-  Year: number;
-  Price: string;
-  Ticket: "Y" | "N" | "NA";
-  Stock: "i" | "r" | "u" | number;
-  Restoration: "Y" | "N" | "NA";
-  Seats: number;
-  Trunk: number;
-  Speed: number;
-  Handling: number;
-  Category: string;
-  Generation: string;
-  Unmarketable: boolean;
-  Image: ImageType;
+  make: string;
+  model: string;
+  year: number;
+  price: string;
+  ticket: "Y" | "N" | "N/A";
+  stock: "i" | "r" | "u" | number;
+  restoration: "Y" | "N" | "N/A";
+  seats: number;
+  trunk: number;
+  speed: number;
+  handling: number;
+  category: string;
+  generation: string;
+  unmarketable: boolean;
+  image: ImageType;
 };
 
 export const columns: ColumnDef<ImportVehicle>[] = [
   {
-    accessorKey: "Make",
+    accessorKey: "make",
     header: ({ column }) => {
       return (
         <Button
@@ -62,20 +62,20 @@ export const columns: ColumnDef<ImportVehicle>[] = [
       return (
         <div
           className={`${
-            row.original.Unmarketable
+            row.original.unmarketable
               ? "text-red-500"
-              : row.original.Ticket === "Y"
+              : row.original.ticket === "Y"
               ? "text-green-600"
               : " text-black"
           } pl-4`}
         >
-          {row.original.Make}
+          {row.original.make}
         </div>
       );
     },
   },
   {
-    accessorKey: "Model",
+    accessorKey: "model",
     header: () => (
       <div className="flex items-center justify-start text-gray-50">Model</div>
     ),
@@ -83,20 +83,20 @@ export const columns: ColumnDef<ImportVehicle>[] = [
       return (
         <div
           className={`${
-            row.original.Unmarketable
+            row.original.unmarketable
               ? "text-red-500"
-              : row.original.Ticket === "Y"
+              : row.original.ticket === "Y"
               ? "text-green-600"
               : " text-black"
           }`}
         >
-          {row.original.Model}
+          {row.original.model}
         </div>
       );
     },
   },
   {
-    accessorKey: "Year",
+    accessorKey: "year",
     header: ({ column }) => {
       return (
         <Button
@@ -110,9 +110,9 @@ export const columns: ColumnDef<ImportVehicle>[] = [
       );
     },
     cell: ({ row }) => {
-      return row.original.Year > 0 ? (
+      return row.original.year > 0 ? (
         <span className="flex items-center justify-center">
-          {row.original.Year}
+          {row.original.year}
         </span>
       ) : (
         <span className="flex items-center justify-center text-red-500">
@@ -122,7 +122,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     },
   },
   {
-    accessorKey: "Price",
+    accessorKey: "price",
     header: ({ column }) => {
       return (
         <Button
@@ -136,21 +136,21 @@ export const columns: ColumnDef<ImportVehicle>[] = [
       );
     },
     cell: ({ row }) => {
-      function formatNumberWithCommas(Price: string) {
-        return _.replace(Price, /\B(?=(\d{3})+(?!\d))/g, ",");
+      function formatNumberWithCommas(price: string) {
+        return _.replace(price, /\B(?=(\d{3})+(?!\d))/g, ",");
       }
       return (
         <div
           className={`${
-            row.original.Unmarketable
+            row.original.unmarketable
               ? "text-red-500"
-              : row.original.Ticket === "Y"
+              : row.original.ticket === "Y"
               ? "text-green-600"
               : " text-black"
           } flex items-center justify-center`}
         >
-          {(row.original as any).Price > 0 ? (
-            `$${formatNumberWithCommas(row.original.Price)}`
+          {(row.original as any).price > 0 ? (
+            `$${formatNumberWithCommas(row.original.price)}`
           ) : (
             <span className="flex items-center justify-center text-red-500">
               {"-"}
@@ -161,7 +161,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     },
   },
   {
-    accessorKey: "Stock",
+    accessorKey: "stock",
     header: ({ column }) => {
       return (
         <Button
@@ -175,8 +175,8 @@ export const columns: ColumnDef<ImportVehicle>[] = [
       );
     },
     cell: ({ row }) => {
-      function transformStock(Stock: any) {
-        switch (Stock) {
+      function transformStock(stock: any) {
+        switch (stock) {
           case "r":
             return "RESTRICTED";
           case "u":
@@ -184,37 +184,33 @@ export const columns: ColumnDef<ImportVehicle>[] = [
           case "i":
             return "INF";
           default:
-            return Stock;
+            return stock;
         }
       }
-      function extractNumberFromString(string: string) {
-        const numberRegex = /\d+/;
-        const match = string.match(numberRegex);
-        return match ? Number(match[0]) : string;
-      }
+
       return (
         <div
           className={`${
-            row.original.Stock === "u"
+            row.original.stock === "u"
               ? "bg-red-500 text-slate-50"
-              : row.original.Stock === "r"
+              : row.original.stock === "r"
               ? "bg-black text-red-600"
-              : row.original.Stock === "i"
+              : row.original.stock === "i"
               ? "bg-blue-400 text-slate-50"
-              : (row.original.Stock as any) == "0"
+              : (row.original.stock as any) == "0"
               ? "bg-red-700 text-white"
-              : row.original.Stock > 0 && row.original.Stock <= 5
+              : row.original.stock > 0 && row.original.stock <= 5
               ? "bg-orange-500 text-slate-50"
               : "bg-blue-700 text-white"
           } flex items-center justify-center h-full w-full py-1 px-2`}
         >
-          {transformStock(extractNumberFromString(row.original.Stock as any))}
+          {transformStock(row.original.stock as any)}
         </div>
       );
     },
   },
   {
-    accessorKey: "Restoration",
+    accessorKey: "restoration",
     header: () => (
       <div className="flex items-center justify-center text-gray-50">
         Restoration
@@ -223,11 +219,11 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     cell: ({ row }) => {
       return (
         <p className="flex items-center justify-center">
-          {row.original.Restoration === "Y" ? (
+          {row.original.restoration === "Y" ? (
             <span className="flex items-center justify-center text-green-600">
               <Check />
             </span>
-          ) : row.original.Restoration === "N" ? (
+          ) : row.original.restoration === "N" ? (
             <span className="flex items-center justify-center text-red-700">
               <Xmark />
             </span>
@@ -241,7 +237,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     },
   },
   {
-    accessorKey: "Seats",
+    accessorKey: "seats",
     header: ({ column }) => {
       return (
         <Button
@@ -257,13 +253,13 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-center">
-          {row.original.Seats}
+          {row.original.seats}
         </div>
       );
     },
   },
   {
-    accessorKey: "Trunk",
+    accessorKey: "trunk",
     header: ({ column }) => {
       return (
         <Button
@@ -279,13 +275,13 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-center">
-          {row.original.Trunk}
+          {row.original.trunk}
         </div>
       );
     },
   },
   {
-    accessorKey: "Speed",
+    accessorKey: "speed",
     header: ({ column }) => {
       return (
         <Button
@@ -301,19 +297,19 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          {row.original.Speed === 999 ? (
+          {row.original.speed === 999 ? (
             <span className="flex items-center justify-center text-red-500">
               {"-"}
             </span>
           ) : (
-            <span className="flex items-center justify-center">{`${row.original.Speed} mph`}</span>
+            <span className="flex items-center justify-center">{`${row.original.speed} mph`}</span>
           )}
         </div>
       );
     },
   },
   {
-    accessorKey: "Handling",
+    accessorKey: "handling",
     header: ({ column }) => {
       return (
         <Button
@@ -329,13 +325,13 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-center">
-          {`${row.original.Handling}/5`}
+          {`${row.original.handling}/5`}
         </div>
       );
     },
   },
   {
-    accessorKey: "Category",
+    accessorKey: "category",
     header: ({ column }) => {
       return (
         <Button
@@ -351,13 +347,13 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-center text-base uppercase">
-          {row.original.Category}
+          {row.original.category}
         </div>
       );
     },
   },
   {
-    accessorKey: "Generation",
+    accessorKey: "generation",
     header: () => (
       <div className="flex items-center justify-center text-gray-50">
         Generation
@@ -366,7 +362,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-center text-base uppercase">
-          {`Generation ${row.original.Generation}`}
+          {`Generation ${row.original.generation}`}
         </div>
       );
     },
