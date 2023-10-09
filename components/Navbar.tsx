@@ -21,11 +21,37 @@ const Navbar = () => {
     return null;
   }
 
+  const navLinks = [
+    {
+      id: 1,
+      name: "Home",
+      slug: "/",
+    },
+    {
+      id: 2,
+      name: "Import",
+      slug: "/import",
+    },
+    {
+      id: 3,
+      name: "Midnight",
+      slug: "/midnight",
+    },
+  ];
+
   return (
-    <nav className="fixed top-0 z-20 flex items-center justify-center w-full h-20 mx-auto space-x-40 text-2xl font-semibold tracking-wider bg-emerald-700 text-slate-50">
-      <Link href="/">Home</Link>
-      <Link href="/import">Import</Link>
-      <Link href="/midnight">Midnight</Link>
+    <nav className="fixed top-0 z-20 flex items-center justify-center w-full h-20 mx-auto space-x-40 bg-emerald-700">
+      {navLinks.map((link) => (
+        <Link
+          key={link.id}
+          href={link.slug}
+          className={`${
+            pathname === link.slug ? "text-red-400" : ""
+          } text-2xl font-semibold tracking-tight uppercase text-slate-50`}
+        >
+          {link.name}
+        </Link>
+      ))}
     </nav>
   );
 };
