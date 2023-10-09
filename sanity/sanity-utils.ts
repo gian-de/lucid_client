@@ -1,6 +1,7 @@
+import { ImportVehicle } from "@/app/(root)/import/components/columns";
 import { createClient, groq } from "next-sanity";
 
-export async function getVehicles() {
+export async function getVehicles(): Promise<ImportVehicle[]> {
   const client = createClient({
     projectId: "xl3skqmu",
     dataset: "production",
