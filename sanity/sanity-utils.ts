@@ -3,8 +3,8 @@ import { createClient, groq } from "next-sanity";
 
 export async function getVehicles(): Promise<ImportVehicle[]> {
   const client = createClient({
-    projectId: process.env.SANITY_STUDIO_PROJECT_ID,
-    dataset: process.env.SANITY_STUDIO_DATASET,
+    projectId: "xl3skqmu",
+    dataset: "production",
     apiVersion: "2023-10-06",
   });
 
