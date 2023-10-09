@@ -213,7 +213,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     accessorKey: "restoration",
     header: () => (
       <div className="flex items-center justify-center text-gray-50">
-        Restoration
+        Restock
       </div>
     ),
     cell: ({ row }) => {
@@ -361,7 +361,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <div className="flex items-center justify-center text-base uppercase">
+        <div className="flex items-center justify-center pr-4 text-base uppercase">
           {`Generation ${row.original.generation}`}
         </div>
       );

@@ -56,16 +56,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex flex-col w-[90vw] mx-auto">
-        <div className="flex items-center justify-center pt-5 space-x-16 text-lg font-semibold tracking-tighter uppercase">
-          <div className="flex space-x-2">
-            <div className="flex items-center space-x-4">Total Vehicles:</div>
-            <div className="text-2xl">[{data.length}]</div>
-          </div>
-          <p>
-            <span className="text-green-600">$$$</span> = Ticket required
-          </p>
-        </div>
+      <div className="flex flex-col w-[90vw] h-[85vh] mx-auto">
         <div className="flex items-center justify-between py-5">
           <Input
             placeholder="Search by Make..."
@@ -75,9 +66,18 @@ export function DataTable<TData, TValue>({
             }
             className="max-w-lg text-xl"
           />
-          <p className="text-lg">
+          <div>
+            <div className="flex space-x-2">
+              <div className="flex items-center space-x-4">Total Vehicles:</div>
+              <div className="text-2xl">[{data.length}]</div>
+            </div>
+            <p>
+              <span className="text-green-600">$$$</span> = Ticket required
+            </p>
+          </div>
+          {/* <p className="text-lg">
             {"scroll the table row to view more info -->"}
-          </p>
+          </p> */}
         </div>
         <Table className="relative w-full">
           <TableHeader className="sticky top-0 z-10 h-20 text-lg font-medium tracking-tight uppercase bg-gray-700">
