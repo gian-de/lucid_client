@@ -99,7 +99,7 @@ export function DataTable<TData, TValue>({
     <>
       <div className="flex flex-col w-[93vw] h-[88vh] mx-auto">
         <div className="flex items-center justify-between w-full py-5">
-          <div className="flex items-center w-11/12 space-x-12">
+          <div className="flex items-center w-11/12 space-x-6 md:space-x-10 lg:space-x-12">
             <Input
               placeholder="Search by Make..."
               value={
@@ -108,10 +108,13 @@ export function DataTable<TData, TValue>({
               onChange={(event) =>
                 table.getColumn("make")?.setFilterValue(event.target.value)
               }
-              className="max-w-xl text-xl border-gray-600"
+              className="max-w-sm text-xl border-gray-600"
             />
-            <div className="flex items-center justify-center space-x-10 text-sm tracking-tight sm:text-xl whitespace-nowrap">
-              <label id="all" className="flex items-center space-x-1">
+            <div className="flex items-center justify-center space-x-4 text-sm tracking-tight md:space-x-10 sm:text-xl whitespace-nowrap">
+              <label
+                id="all"
+                className="flex items-center space-x-1 cursor-pointer"
+              >
                 <input
                   type="radio"
                   value={"all"}
@@ -120,10 +123,10 @@ export function DataTable<TData, TValue>({
                   className="w-5 h-5"
                 />
                 <span>
-                  <span className="hidden sm:inline-block">Show</span> All
+                  <span className="hidden md:inline-block">Show</span> All
                 </span>
               </label>
-              <label className="flex items-center space-x-1">
+              <label className="flex items-center space-x-1 cursor-pointer">
                 <input
                   type="radio"
                   value={"Y"}
@@ -133,7 +136,7 @@ export function DataTable<TData, TValue>({
                 />
                 <span>Ticket</span>
               </label>
-              <label className="flex items-center space-x-1">
+              <label className="flex items-center space-x-1 cursor-pointer">
                 <input
                   type="radio"
                   value={"N"}
@@ -145,19 +148,19 @@ export function DataTable<TData, TValue>({
               </label>
             </div>
 
-            <div className="flex space-x-2 text-lg sm:text-2xl whitespace-nowrap">
-              <div className="flex items-center space-x-4">Total Vehicles:</div>
-              <div className="text-xl sm:text-3xl">
+            <div className="flex items-center space-x-1 text-lg md:text-xl whitespace-nowrap">
+              <div className="flex">Total Vehicles:</div>
+              <div className="flex text-xl md:text-2xl">
                 [{filteredData?.length}]
               </div>
             </div>
           </div>
-          <div className="ml-auto bg-green-200">
+          <div className="ml-auto">
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Button
                   variant="outline"
-                  className="text-xl border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-slate-50"
+                  className="px-3 py-2 overflow-hidden text-sm tracking-tighter border-gray-700 cursor-pointer whitespace-nowrap hover:bg-gray-700 hover:text-slate-50"
                 >
                   <p>View More</p>
                 </Button>
