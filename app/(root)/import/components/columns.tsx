@@ -51,7 +51,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
+          className="flex items-center justify-center mx-auto text-lg tracking-tight text-center uppercase text-gray-50"
         >
           Make
           <ArrowUpDown className="w-5 h-5 ml-2" />
@@ -65,9 +65,9 @@ export const columns: ColumnDef<ImportVehicle>[] = [
             row.original.unmarketable
               ? "text-red-500"
               : row.original.ticket === "Y"
-              ? "text-green-600"
+              ? "bg-green-600 text-slate-50"
               : " text-black"
-          } pl-4`}
+          } text-center h-full w-full py-1 px-3`}
         >
           {row.original.make}
         </div>
@@ -77,7 +77,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
   {
     accessorKey: "model",
     header: () => (
-      <div className="flex items-center justify-start text-gray-50">Model</div>
+      <div className="flex items-center justify-center text-gray-50">Model</div>
     ),
     cell: ({ row }) => {
       return (
@@ -86,9 +86,9 @@ export const columns: ColumnDef<ImportVehicle>[] = [
             row.original.unmarketable
               ? "text-red-500"
               : row.original.ticket === "Y"
-              ? "text-green-600"
+              ? "bg-green-600 text-slate-50"
               : " text-black"
-          }`}
+          } h-full w-full py-1 px-3 text-center`}
         >
           {row.original.model}
         </div>
