@@ -27,11 +27,11 @@ const Navbar = () => {
       name: "Home",
       slug: "/",
     },
-    {
-      id: 2,
-      name: "Import",
-      slug: "/import",
-    },
+    // {
+    //   id: 2,
+    //   name: "Import",
+    //   slug: "/import",
+    // },
     {
       id: 3,
       name: "Midnight",
@@ -46,7 +46,7 @@ const Navbar = () => {
           key={link.id}
           href={link.slug}
           className={`${
-            pathname === link.slug ? "text-red-400" : ""
+            pathname == link.slug ? "text-red-500" : ""
           } text-2xl font-semibold tracking-tight uppercase text-slate-50`}
         >
           {link.name}

@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useMemo, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 
@@ -33,15 +33,34 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([
+  const [sorting, setSorting] = useState<SortingState>([
     { id: "make", desc: false },
   ]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [selectedFilter, setSelectedFilter] = useState<string | null>("all");
+
+  // Filter data based on the selected filter option
+  const [inputFilter, setInputFilter] = useState<string>("");
+
+  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedFilter(event.target.value);
+    // Clear the input filter when toggling radio buttons
+    setInputFilter("");
+  };
+
+  const filteredData = useMemo(() => {
+    return data.filter((item) => {
+      return (
+        // "as any" is a hacky way, need to fix later
+        (selectedFilter === "Y" && (item as any)?.ticket === "Y") ||
+        (selectedFilter === "N" && (item as any)?.ticket === "N") ||
+        selectedFilter === "all"
+      );
+    });
+  }, [data, selectedFilter]);
 
   const table = useReactTable({
-    data,
+    data: filteredData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
@@ -57,19 +76,55 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex flex-col w-[93vw] h-[88vh] mx-auto">
-        <div className="flex items-center justify-between py-5">
-          <Input
-            placeholder="Search by Make..."
-            value={(table.getColumn("make")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("make")?.setFilterValue(event.target.value)
-            }
-            className="max-w-lg text-xl border-gray-600"
-          />
-          <div className="text-lg">
+        <div className="flex items-center justify-between w-full py-5">
+          <div className="flex w-2/3 space-x-10">
+            <Input
+              placeholder="Search by Make..."
+              value={
+                (table.getColumn("make")?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table.getColumn("make")?.setFilterValue(event.target.value)
+              }
+              className="max-w-xl text-xl border-gray-600"
+            />
+            <div className="flex items-center justify-center space-x-10 text-xl tracking-tight whitespace-nowrap">
+              <label id="all" className="flex items-center space-x-1">
+                <input
+                  type="radio"
+                  value={"all"}
+                  checked={selectedFilter === "all"}
+                  onChange={handleRadioChange}
+                  className="w-5 h-5"
+                />
+                <span>Show All</span>
+              </label>
+              <label className="flex items-center space-x-1">
+                <input
+                  type="radio"
+                  value={"Y"}
+                  checked={selectedFilter === "Y"}
+                  onChange={handleRadioChange}
+                  className="w-5 h-5"
+                />
+                <span>Ticket</span>
+              </label>
+              <label className="flex items-center space-x-1">
+                <input
+                  type="radio"
+                  value={"N"}
+                  checked={selectedFilter === "N"}
+                  onChange={handleRadioChange}
+                  className="w-5 h-5"
+                />
+                <span>No Ticket</span>
+              </label>
+            </div>
+          </div>
+          <div className="text-2xl">
             <div className="flex space-x-2">
               <div className="flex items-center space-x-4">Total Vehicles:</div>
-              <div className="text-2xl">[{data.length}]</div>
+              <div className="text-3xl">[{filteredData?.length}]</div>
             </div>
             <p>
               <span className="text-green-600">$$$</span> = ticket required

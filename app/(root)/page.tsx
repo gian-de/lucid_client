@@ -1,7 +1,11 @@
+import ImportClient from "./import/components/client";
+
+export const revalidate = 60000;
+
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24 text-3xl">
-      <p>home page placeholder text</p>
+    <main className="flex flex-col items-center justify-between min-h-screen mt-20">
+      <ImportClient />
     </main>
   );
 }
