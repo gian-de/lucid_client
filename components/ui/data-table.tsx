@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
+    <>
       <div className="flex flex-col w-[93vw] h-[88vh] mx-auto">
         <div className="flex items-center justify-between w-full py-5">
           <div className="flex w-2/3 space-x-10">
@@ -182,6 +182,6 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-    </div>
+    </>
   );
 }

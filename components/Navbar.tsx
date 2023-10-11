@@ -22,16 +22,16 @@ const Navbar = () => {
   }
 
   const navLinks = [
+    // {
+    //   id: 1,
+    //   name: "Home",
+    //   slug: "/",
+    // },
     {
-      id: 1,
-      name: "Home",
+      id: 2,
+      name: "Import",
       slug: "/",
     },
-    // {
-    //   id: 2,
-    //   name: "Import",
-    //   slug: "/import",
-    // },
     {
       id: 3,
       name: "Midnight",
