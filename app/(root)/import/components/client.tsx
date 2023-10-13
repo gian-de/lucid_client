@@ -2,6 +2,8 @@ import { getVehicles } from "@/sanity/sanity-utils";
 import { columns } from "@/app/(root)/import/components/columns";
 import { DataTable } from "@/components/ui/data-table";
 
+export const revalidate = 0;
+
 const ImportClient = async () => {
   const vehicles = await getVehicles();
   console.log("sanity vehicles", vehicles);

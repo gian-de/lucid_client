@@ -72,6 +72,9 @@ export function DataTable<TData, TValue>({
     });
   }, [data, selectedFilter]);
 
+  // for Input/ Global state
+  const [filtering, setFiltering] = useState("");
+
   const table = useReactTable({
     data: filteredData,
     columns,
@@ -85,7 +88,9 @@ export function DataTable<TData, TValue>({
       sorting,
       columnFilters,
       columnVisibility,
+      globalFilter: filtering,
     },
+    onGlobalFilterChange: setFiltering,
   });
 
   const [mounted, setMounted] = useState(false);
@@ -101,13 +106,9 @@ export function DataTable<TData, TValue>({
         <div className="flex items-center justify-between w-full py-5">
           <div className="flex items-center w-11/12 space-x-6 md:space-x-10 lg:space-x-12">
             <Input
-              placeholder="Search by Make..."
-              value={
-                (table.getColumn("make")?.getFilterValue() as string) ?? ""
-              }
-              onChange={(event) =>
-                table.getColumn("make")?.setFilterValue(event.target.value)
-              }
+              placeholder="Search by Make, Model, etc..."
+              value={filtering ?? ""}
+              onChange={(e) => setFiltering(e.target.value)}
               className="max-w-sm text-xl border-gray-600"
             />
             <div className="flex items-center justify-center space-x-4 text-sm tracking-tight md:space-x-10 sm:text-xl whitespace-nowrap">

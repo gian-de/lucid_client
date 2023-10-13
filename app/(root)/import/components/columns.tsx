@@ -199,7 +199,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
               ? "bg-blue-400 text-slate-50"
               : (row.original.stock as any) == "0"
               ? "bg-red-700 text-white"
-              : row.original.stock > 0 && row.original.stock <= 5
+              : row.original.stock > 0 && row.original.stock <= 4
               ? "bg-orange-500 text-slate-50"
               : "bg-blue-700 text-white"
           } flex items-center justify-center h-full w-full py-1 px-2`}
