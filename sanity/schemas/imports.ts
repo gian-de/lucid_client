@@ -21,6 +21,7 @@ export default {
       name: "year",
       title: "Year",
       type: "number",
+      description: 'If the car "Unmarketable" enter 999',
       validation: (Rule) => Rule.required().integer().min(0).max(2099),
     }),
     defineField({
@@ -28,7 +29,7 @@ export default {
       title: "Price",
       type: "number",
       description:
-        "Just enter the number no need to add 'mph'. If the car is UNMARKETABLE, enter number 0",
+        'Just enter the number no need to add "mph". If the car is "Unmarketable", enter number 0',
       validation: (Rule) => Rule.required().precision(2),
     }),
     defineField({
@@ -61,27 +62,29 @@ export default {
       name: "speed",
       title: "Speed",
       type: "number",
-      description: "If the car is UNMARKETABLE, enter number 999",
+      description: 'If the car "Unmarketable" enter 999',
       validation: (Rule) => Rule.required().integer().min(0).max(999),
     }),
     defineField({
       name: "seats",
       title: "Seats",
       type: "number",
+      description: 'If the car "Unmarketable" enter 999',
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       name: "trunk",
       title: "Trunk",
       type: "number",
+      description: 'If the car "Unmarketable" enter 999',
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       name: "handling",
       title: "Handling",
       type: "number",
-      description: "Enter number 1-5",
-      validation: (Rule) => Rule.required().integer().min(0).max(5),
+      description: 'Enter number 1-5, if its "Unmarketable" enter 6',
+      validation: (Rule) => Rule.required().integer().min(0).max(6),
     }),
     defineField({
       name: "category",

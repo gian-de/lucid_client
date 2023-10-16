@@ -32,16 +32,16 @@ const Navbar = () => {
       name: "Import",
       slug: "/",
     },
-    {
-      id: 3,
-      name: "Midnight",
-      slug: "/midnight",
-    },
+    // {
+    //   id: 3,
+    //   name: "Midnight",
+    //   slug: "/midnight",
+    // },
   ];
 
   return (
-    <nav className="fixed top-0 z-20 flex items-center justify-center w-full h-20 mx-auto space-x-40 bg-emerald-700">
-      {navLinks.map((link) => (
+    <nav className="fixed top-0 z-20 flex items-center justify-center w-full h-16 mx-auto space-x-40 bg-emerald-700">
+      {/* {navLinks.map((link) => (
         <Link
           key={link.id}
           href={link.slug}
@@ -51,7 +51,8 @@ const Navbar = () => {
         >
           {link.name}
         </Link>
-      ))}
+      ))} */}
+      <span className="text-xl italic text-slate-50">- favio828</span>
     </nav>
   );
 };

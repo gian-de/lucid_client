@@ -43,6 +43,8 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([
     { id: "make", desc: false },
+    { id: "model", desc: false },
+    { id: "price", desc: false },
   ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [selectedFilter, setSelectedFilter] = useState<string | null>("all");
@@ -102,16 +104,16 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex flex-col w-[93vw] h-[88vh] mx-auto">
-        <div className="flex items-center justify-between w-full py-5">
-          <div className="flex items-center w-11/12 space-x-6 md:space-x-10 lg:space-x-12">
+      <div className="flex flex-col w-[93vw] h-[91vh] mx-auto">
+        <div className="flex items-center justify-between w-full py-4">
+          <div className="flex items-center w-11/12 space-x-4 md:space-x-6">
             <Input
               placeholder="Search by Make, Model, etc..."
               value={filtering ?? ""}
               onChange={(e) => setFiltering(e.target.value)}
               className="max-w-sm text-xl border-gray-600"
             />
-            <div className="flex items-center justify-center space-x-4 text-sm tracking-tight md:space-x-10 sm:text-xl whitespace-nowrap">
+            <div className="flex items-center justify-center space-x-4 text-sm tracking-tight sm:text-xl whitespace-nowrap">
               <label
                 id="all"
                 className="flex items-center space-x-1 cursor-pointer"

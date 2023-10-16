@@ -110,13 +110,13 @@ export const columns: ColumnDef<ImportVehicle>[] = [
       );
     },
     cell: ({ row }) => {
-      return row.original.year > 0 ? (
-        <span className="flex items-center justify-center">
-          {row.original.year}
-        </span>
-      ) : (
+      return row.original.year == 999 ? (
         <span className="flex items-center justify-center text-red-500">
           {"-"}
+        </span>
+      ) : (
+        <span className="flex items-center justify-center">
+          {row.original.year}
         </span>
       );
     },
@@ -280,8 +280,16 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     },
     cell: ({ row }) => {
       return (
-        <div className="flex items-center justify-center">
-          {row.original.seats}
+        <div>
+          {row.original.seats == 999 ? (
+            <span className="flex items-center justify-center text-red-500">
+              {"-"}
+            </span>
+          ) : (
+            <span className="flex items-center justify-center">
+              {row.original.seats}
+            </span>
+          )}
         </div>
       );
     },
@@ -302,8 +310,16 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     },
     cell: ({ row }) => {
       return (
-        <div className="flex items-center justify-center">
-          {row.original.trunk}
+        <div>
+          {row.original.trunk == 999 ? (
+            <span className="flex items-center justify-center text-red-500">
+              {"-"}
+            </span>
+          ) : (
+            <span className="flex items-center justify-center">
+              {row.original.trunk}
+            </span>
+          )}
         </div>
       );
     },
@@ -325,8 +341,14 @@ export const columns: ColumnDef<ImportVehicle>[] = [
     },
     cell: ({ row }) => {
       return (
-        <div className="flex items-center justify-center">
-          {`${row.original.handling}/5`}
+        <div>
+          {row.original.handling == 6 ? (
+            <span className="flex items-center justify-center text-red-500">
+              {"-"}
+            </span>
+          ) : (
+            <span className="flex items-center justify-center">{`${row.original.handling}/5`}</span>
+          )}
         </div>
       );
     },
