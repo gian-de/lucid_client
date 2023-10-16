@@ -88,7 +88,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
               : row.original.ticket === "Y"
               ? "bg-green-600 text-slate-50"
               : " text-black"
-          } h-full w-full py-1 px-3 text-center`}
+          } h-full w-full py-1 px-3 text-center space-x-2`}
         >
           {row.original.model}
         </div>
@@ -245,7 +245,7 @@ export const columns: ColumnDef<ImportVehicle>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="flex items-center justify-start text-lg tracking-tight uppercase text-gray-50"
         >
-          Speed
+          Stock Speed
           <ArrowUpDown className="w-5 h-5 ml-2" />
         </Button>
       );
@@ -254,7 +254,13 @@ export const columns: ColumnDef<ImportVehicle>[] = [
       return (
         <div>
           {row.original.speed === 999 ? (
-            <span className="flex items-center justify-center text-red-500">
+            <span
+              className={`${
+                row.original.unmarketable === true
+                  ? "text-red-500"
+                  : "text-black"
+              } flex items-center justify-center `}
+            >
               {"-"}
             </span>
           ) : (

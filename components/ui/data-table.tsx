@@ -157,6 +157,12 @@ export function DataTable<TData, TValue>({
                 [{filteredData?.length}]
               </div>
             </div>
+            <div className="flex items-center pl-8 space-x-1 text-lg md:text-xl whitespace-nowrap">
+              <div className="flex px-2 py-1 bg-green-600 rounded-md text-slate-50">
+                Green
+              </div>
+              <div className="flex">{`= Ticket`}</div>
+            </div>
           </div>
           <div className="ml-auto">
             <DropdownMenu>

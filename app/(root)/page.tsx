@@ -1,6 +1,6 @@
 import ImportClient from "./import/components/client";
 
-// export const revalidate = 00;
+// export const revalidate = 3;
 
 export default function Home() {
   return (
